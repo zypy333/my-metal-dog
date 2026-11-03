@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>Go · 无衬线 50 + 斜体 50</title>
+<style>
+  :root {
+    --blue: #315AFF;
+    --ink: #1E2233;
+    --muted: #7C8598;
+    --line: #E4E8F0;
+    --bg: #F5F7FA;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px;
+    background: var(--bg);
+    font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .block + .block { margin-top: 56px; }
+  .head { display: flex; align-items: flex-end; justify-content: space-between; height: 64px; margin-bottom: 12px; }
+  .head .mark { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; color: var(--blue); }
+  .head h1 { margin: 4px 0 0; font-size: 20px; font-weight: 600; }
+  .head .range { font-size: 12px; color: var(--muted); }
+  .legend { display: flex; gap: 14px; font-size: 10px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .legend i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+  .grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 10px; }
+  .card {
+    position: relative;
+    height: 146px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  .no { position: absolute; top: 8px; right: 10px; font-size: 9px; font-weight: 600; color: #B9C1D0; letter-spacing: 0.06em; }
+  .glyph { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2px 0 0; font-size: 56px; line-height: 1; color: var(--blue); white-space: nowrap; }
+  .meta { display: flex; align-items: center; gap: 5px; padding-top: 7px; border-top: 1px solid #F0F2F7; }
+  .dot { width: 5px; height: 5px; border-radius: 50%; flex: none; }
+  .label { font-size: 9.5px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  footer { margin-top: 20px; font-size: 10px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<section class="block" id="blockA">
+  <div class="head">
+    <div>
+      <div class="mark">METAL DOG · TYPE SPECIMEN</div>
+      <h1>「Go」无衬线 50 款 · 01 — 50</h1>
+    </div>
+    <div class="legend">
+      <span><i style="background:#315AFF"></i>无衬线</span>
+      <span><i style="background:#EF4444"></i>展示</span>
+      <span><i style="background:#12A594"></i>等宽</span>
+      <span><i style="background:#F59E0B"></i>手写</span>
+      <span><i style="background:#64748B"></i>中文</span>
+    </div>
+  </div>
+  <div class="grid" id="gridA"></div>
+</section>
+
+<section class="block" id="blockB">
+  <div class="head">
+    <div>
+      <div class="mark">METAL DOG · TYPE SPECIMEN</div>
+      <h1>「Go」倾斜 / 斜体 50 款 · 51 — 100</h1>
+    </div>
+    <div class="range">同一组字体，优先真实斜体，无斜体时使用倾斜合成</div>
+  </div>
+  <div class="grid" id="gridB"></div>
+  <footer>全部为无衬线、等宽、手写或中文黑体，已剔除 Georgia / Times / Cambria / Palatino / Sitka / 宋体 / 仿宋 / 楷体等衬线字体。长按可放大。</footer>
+</section>
+
+<script>
+const COLORS = { sans: '#315AFF', display: '#EF4444', mono: '#12A594', script: '#F59E0B', cjk: '#64748B' };
+
+const FONTS = [
+['Arial','Arial',400,'sans'],
+['Arial Bold','Arial',700,'sans'],
+['Arial Black','Arial Black',400,'display'],
+['Verdana','Verdana',400,'sans'],
+['Tahoma','Tahoma',400,'sans'],
+['Trebuchet MS','Trebuchet MS',400,'sans'],
+['Calibri','Calibri',400,'sans'],
+['Calibri Light','Calibri Light',400,'sans'],
+['Candara','Candara',400,'sans'],
+['Corbel','Corbel',400,'sans'],
+['Segoe UI','Segoe UI',400,'sans'],
+['Segoe UI Light','Segoe UI Light',400,'sans'],
+['Segoe UI Semibold','Segoe UI Semibold',400,'sans'],
+['Segoe UI Black','Segoe UI Black',400,'sans'],
+['Segoe UI Var Display','Segoe UI Variable Display',400,'sans'],
+['Segoe UI Var Text','Segoe UI Variable Text',400,'sans'],
+['Microsoft Sans Serif','Microsoft Sans Serif',400,'sans'],
+['Franklin Gothic','Franklin Gothic Medium',400,'sans'],
+['Impact','Impact',400,'display'],
+['Bahnschrift','Bahnschrift',400,'display'],
+['Bahnschrift Light','Bahnschrift Light',400,'display'],
+['Bahnschrift SemiBold','Bahnschrift SemiBold',400,'display'],
+['Bahnschrift Condensed','Bahnschrift Condensed',400,'display'],
+['Lucida Sans Unicode','Lucida Sans Unicode',400,'sans'],
+['Leelawadee UI','Leelawadee UI',400,'sans'],
+['Malgun Gothic','Malgun Gothic',400,'sans'],
+['Yu Gothic Light','Yu Gothic Light',400,'sans'],
+['Yu Gothic Medium','Yu Gothic Medium',400,'sans'],
+['Yu Gothic UI','Yu Gothic UI',400,'sans'],
+['等线','等线',400,'cjk'],
+['等线 Light','等线 Light',400,'cjk'],
+['微软雅黑','微软雅黑',400,'cjk'],
+['微软雅黑 Light','微软雅黑 Light',400,'cjk'],
+['Microsoft YaHei UI','Microsoft YaHei UI',400,'cjk'],
+['微軟正黑體','微軟正黑體',400,'cjk'],
+['黑体','黑体',400,'cjk'],
+['Noto Sans SC','Noto Sans SC',400,'cjk'],
+['Noto Sans SC Black','Noto Sans SC Black',400,'cjk'],
+['Consolas','Consolas',400,'mono'],
+['Cascadia Code','Cascadia Code',400,'mono'],
+['Cascadia Mono','Cascadia Mono',400,'mono'],
+['Courier New','Courier New',400,'mono'],
+['Lucida Console','Lucida Console',400,'mono'],
+['MS Gothic','MS Gothic',400,'cjk'],
+['Segoe Script','Segoe Script',400,'script'],
+['Segoe Print','Segoe Print',400,'script'],
+['Ink Free','Ink Free',400,'script'],
+['Comic Sans MS','Comic Sans MS',400,'script'],
+['Gabriola','Gabriola',400,'script'],
+['MV Boli','MV Boli',400,'script']
+];
+
+function card([label, family, weight, tag], no, italic) {
+  const style = `font-family:'${family}';font-weight:${weight};font-style:${italic ? 'italic' : 'normal'}`;
+  return `
+    <article class="card" title="${label}${italic ? ' Italic' : ''}">
+      <span class="no">${String(no).padStart(2, '0')}</span>
+      <div class="glyph" style="${style}">Go</div>
+      <div class="meta"><span class="dot" style="background:${COLORS[tag]}"></span><span class="label">${label}${italic ? ' Italic' : ''}</span></div>
+    </article>`;
+}
+
+document.getElementById('gridA').innerHTML = FONTS.map((f, i) => card(f, i + 1, false)).join('');
+document.getElementById('gridB').innerHTML = FONTS.map((f, i) => card(f, i + 51, true)).join('');
+
+// 截图用：?half=a / ?half=b 只渲染一半，避免页面滚动带来的偏移
+const half = new URLSearchParams(location.search).get('half');
+if (half === 'a') document.getElementById('blockB').remove();
+if (half === 'b') {
+  document.getElementById('blockA').remove();
+  document.body.style.paddingTop = '0';
+}
+</script>
+</body>
+</html>

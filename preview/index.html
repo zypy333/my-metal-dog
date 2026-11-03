@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>金属狗 · 图标与主题预览</title>
+<style>
+  :root {
+    --brand: #315aff;
+    --brand-pressed: #2547d9;
+    --brand-soft: #ebefff;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --line: #e5e9f0;
+    --bg: #f5f7fa;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 48px 24px 72px; }
+  .eyebrow { font-size: 12px; letter-spacing: .16em; color: var(--brand); font-weight: 700; text-transform: uppercase; }
+  h1 { font-size: 30px; margin: 10px 0 8px; letter-spacing: -.02em; }
+  .lede { color: var(--muted); font-size: 14px; margin: 0 0 36px; }
+  section { margin-top: 44px; }
+  h2 { font-size: 15px; font-weight: 700; margin: 0 0 16px; color: var(--ink); }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 18px; }
+
+  /* 图标 */
+  .icon-row { display: flex; align-items: flex-end; gap: 36px; flex-wrap: wrap; padding: 36px; }
+  .icon-main { display: flex; flex-direction: column; gap: 10px; }
+  .icon-main img { width: 184px; height: 184px; border-radius: 40px; box-shadow: 0 18px 40px -18px rgba(49, 90, 255, .55); }
+  .sizes { display: flex; align-items: flex-end; gap: 22px; }
+  .size { text-align: center; color: var(--muted); font-size: 11px; }
+  .size img { display: block; border-radius: 22%; margin: 0 auto 8px; }
+  .adaptive { display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--muted); font-size: 11px; }
+  .adaptive .mask {
+    width: 120px; height: 120px; border-radius: 50%; background: var(--brand);
+    position: relative; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.25);
+  }
+  .adaptive .mask img { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* 色板 */
+  .swatches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .swatch { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
+  .chip { height: 84px; }
+  .swatch-meta { padding: 12px 14px 14px; }
+  .swatch-meta b { display: block; font-size: 13px; margin-bottom: 3px; }
+  .swatch-meta code { font-size: 12px; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .swatch-meta s { color: #b6bdc9; font-size: 11px; margin-left: 6px; }
+
+  /* 归档 */
+  .archive { display: flex; align-items: center; gap: 18px; padding: 20px 24px; }
+  .archive img { width: 72px; height: 72px; border-radius: 18px; }
+  .archive .meta b { display: block; font-size: 13px; margin-bottom: 4px; }
+  .archive .meta span { font-size: 12px; color: var(--muted); }
+
+  /* 截图 */
+  .screens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+  .phone { text-align: center; }
+  .phone .frame {
+    background: #fff; border: 1px solid var(--line); border-radius: 34px; padding: 8px;
+    box-shadow: 0 24px 60px -30px rgba(15, 23, 42, .28);
+  }
+  .phone .frame img { display: block; width: 100%; border-radius: 27px; }
+  .phone .cap { margin-top: 12px; font-size: 12px; color: var(--muted); }
+
+  .foot { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); line-height: 1.8; }
+
+  @media (max-width: 720px) {
+    .screens { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+    .swatches { grid-template-columns: 1fr; }
+    .icon-row { gap: 24px; padding: 24px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="eyebrow">Metal Dog · Brand Preview</div>
+    <h1>图标与主题蓝</h1>
+    <p class="lede">新图标选用 Bahnschrift SemiBold Italic 字标：白色倾斜「Go」占画布约 86% 宽度，四周留白收紧。上一版狗头方案已归档保留。</p>
+
+    <section>
+      <h2>图标</h2>
+      <div class="card icon-row">
+        <div class="icon-main">
+          <img src="../assets/images/icon.png" alt="App 图标 1024" />
+          <span class="size-note" style="font-size:11px;color:var(--muted)">iOS / 主图标 1024×1024</span>
+        </div>
+        <div class="sizes">
+          <div class="size"><img src="../assets/images/pwa-192.png" width="96" height="96" alt="96" />96px</div>
+          <div class="size"><img src="../assets/images/pwa-192.png" width="64" height="64" alt="64" />64px</div>
+          <div class="size"><img src="../assets/images/favicon.png" width="48" height="48" alt="48" />48px</div>
+        </div>
+        <div class="adaptive">
+          <div class="mask"><img src="../assets/images/android-icon-foreground.png" alt="自适应图标前景" /></div>
+          <span>Android 自适应图标</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>上一版（已归档）</h2>
+      <div class="card archive">
+        <img src="../assets/brand-archive/icon-v1/icon.png" alt="v1 图标" />
+        <div class="meta">
+          <b>v1 · 狗头 + 哑铃</b>
+          <span>原始文件保留在 <code>assets/brand-archive/icon-v1/</code>，未参与构建。</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>主题色</h2>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="chip" style="background:#315aff"></div>
+          <div class="swatch-meta"><b>primary</b><code>#315AFF</code><s>#2563EB</s></div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#2547d9"></div>
+          <div class="swatch-meta"><b>primaryPressed</b><code>#2547D9</code><s>#1D4ED8</s></div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#ebefff"></div>
+          <div class="swatch-meta"><b>primarySoft</b><code>#EBEFFF</code><s>#EAF1FF</s></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>App 预览</h2>
+      <div class="screens">
+        <div class="phone">
+          <div class="frame"><img src="home.png" alt="健身房页" /></div>
+          <div class="cap">健身房 · 实时人数与温湿度</div>
+        </div>
+        <div class="phone">
+          <div class="frame"><img src="calendar.png" alt="训练日历页" /></div>
+          <div class="cap">训练日历 · 本地签到</div>
+        </div>
+      </div>
+    </section>
+
+    <p class="foot">
+      截图来自 <code>expo export -p web</code> 构建产物，390×844 视口、2x 像素密度。<br />
+      图标渲染源在 <code>assets/brand/icon-go.html</code>（Bahnschrift SemiBold Italic），已输出 <code>icon.png</code>、<code>favicon.png</code>、<code>pwa-192.png</code> / <code>pwa-512.png</code> 与 Android 自适应前景。
+    </p>
+  </div>
+</body>
+</html>

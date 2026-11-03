@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#315AFF" />
+    <meta
+      name="description"
+      content="撸铁雷达 Android 版下载：查看常去健身房实时人数与温湿度，记录训练打卡日历。"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>下载 撸铁雷达 · Android 版 1.0.0</title>
+    <link rel="icon" href="/icons/icon-192.png?v=2" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2" />
+    <style>
+      :root {
+        color-scheme: light;
+        --primary: #315aff;
+        --primary-pressed: #2547d9;
+        --primary-soft: #ebefff;
+        --background: #f5f7fa;
+        --surface: #ffffff;
+        --border: #e5e9f0;
+        --text: #0f172a;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --danger: #ef4444;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        background: var(--background);
+        color: var(--text);
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+          'Microsoft YaHei', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.6;
+      }
+
+      .page {
+        width: 100%;
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 32px 20px 48px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .brand-mark {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: none;
+        box-shadow: 0 8px 20px rgba(49, 90, 255, 0.28);
+      }
+
+      .brand-mark img {
+        width: 100%;
+        height: 100%;
+        border-radius: 14px;
+        display: block;
+        object-fit: cover;
+      }
+
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .brand-name {
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+
+      .brand-sub {
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      .hero {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      }
+
+      .hero h1 {
+        margin: 0 0 6px;
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      .hero p {
+        margin: 0;
+        font-size: 14px;
+        color: var(--text-secondary);
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 18px 0 20px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: var(--background);
+        border: 1px solid var(--border);
+        font-size: 12px;
+        color: var(--text-secondary);
+      }
+
+      .chip strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .download {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 15px 20px;
+        border: 0;
+        border-radius: 14px;
+        background: var(--primary);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        font-family: inherit;
+        text-decoration: none;
+        box-shadow: 0 8px 20px rgba(49, 90, 255, 0.25);
+        transition: background 0.15s ease, transform 0.15s ease;
+      }
+
+      .download:hover {
+        background: var(--primary-pressed);
+      }
+
+      .download:active {
+        transform: translateY(1px);
+      }
+
+      .download svg {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .hint {
+        margin: 12px 0 0;
+        font-size: 12px;
+        color: var(--text-muted);
+        text-align: center;
+      }
+
+      .hint a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .section {
+        margin-top: 24px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 20px 22px;
+      }
+
+      .section h2 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 12px;
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .section h2::before {
+        content: '';
+        width: 4px;
+        height: 14px;
+        border-radius: 2px;
+        background: var(--primary);
+      }
+
+      .facts {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+      }
+
+      .fact {
+        display: grid;
+        grid-template-columns: 76px 1fr;
+        gap: 10px;
+        font-size: 13px;
+      }
+
+      .fact dt {
+        color: var(--text-muted);
+      }
+
+      .fact dd {
+        margin: 0;
+        color: var(--text);
+      }
+
+      .fact dd.ok {
+        color: #16a34a;
+        font-weight: 600;
+      }
+
+      .fact dd.no {
+        color: var(--danger);
+        font-weight: 600;
+      }
+
+      .steps {
+        margin: 0;
+        padding-left: 18px;
+        font-size: 13px;
+        color: var(--text-secondary);
+      }
+
+      .steps li + li {
+        margin-top: 6px;
+      }
+
+      .warn {
+        margin-top: 12px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: #fff7ed;
+        border: 1px solid #fed7aa;
+        font-size: 12px;
+        color: #9a3412;
+      }
+
+      .disclaimer {
+        margin-top: 28px;
+        font-size: 12px;
+        line-height: 1.7;
+        color: var(--text-muted);
+      }
+
+      .footer {
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-size: 12px;
+      }
+
+      .footer a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      @media (min-width: 520px) {
+        .page {
+          padding-top: 48px;
+        }
+
+        .hero h1 {
+          font-size: 26px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <img src="/icons/icon-192.png?v=2" alt="" />
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">撸铁雷达</span>
+          <span class="brand-sub">非官方 · 我的健身房</span>
+        </div>
+      </header>
+
+      <section class="hero">
+        <h1>Android 版安装包</h1>
+        <p>查看常去健身房的实时人数与温湿度，顺带记录每日训练打卡。</p>
+
+        <div class="meta">
+          <span class="chip">版本 <strong>1.0.0</strong></span>
+          <span class="chip">大小 <strong>14.4 MB</strong></span>
+          <span class="chip">架构 <strong>arm64-v8a</strong></span>
+          <span class="chip">系统 <strong>Android 7.0+</strong></span>
+        </div>
+
+        <a class="download" href="./metal-dog-1.0.0-arm64-v8a.apk" download>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+          </svg>
+          下载 APK
+        </a>
+        <p class="hint">
+          下载慢或链接打不开？可改用
+          <a href="https://github.com/zypy333/my-metal-dog/releases/tag/v1.0" target="_blank" rel="noopener">
+            GitHub Release
+          </a>
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>适用范围</h2>
+        <dl class="facts">
+          <div class="fact">
+            <dt>系统版本</dt>
+            <dd>Android 7.0（API 24）及以上</dd>
+          </div>
+          <div class="fact">
+            <dt>处理器</dt>
+            <dd class="ok">仅支持 arm64-v8a（64 位 ARMv8）</dd>
+          </div>
+          <div class="fact">
+            <dt>支持设备</dt>
+            <dd>近几年的安卓手机 / 平板，基本都满足</dd>
+          </div>
+          <div class="fact">
+            <dt>不支持</dt>
+            <dd class="no">armeabi-v7a（32 位老机型）、x86 / x86_64（模拟器与部分 Intel 芯片设备）</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="section">
+        <h2>安装步骤</h2>
+        <ol class="steps">
+          <li>点击上方按钮下载 APK 文件。</li>
+          <li>在系统设置中允许浏览器或文件管理器「安装未知来源应用」。</li>
+          <li>打开下载好的 APK，按提示完成安装。</li>
+        </ol>
+        <p class="warn">
+          安装包为个人侧载版本（debug 签名，未上架应用商店），与以后更换签名方式的版本不能互相覆盖升级，切换前需先卸载旧版。首次打开如提示风险，属正常现象。
+        </p>
+      </section>
+
+      <p class="disclaimer">
+        本项目为个人兴趣作品，与「金属狗」App 及其运营方无任何关联，未获授权或背书。门店与人数等数据来自第三方公开接口，仅供参考，不保证准确与持续可用；请勿用于商业用途或高频抓取。选中门店与打卡记录仅保存在设备本地。
+      </p>
+
+      <nav class="footer">
+        <a href="/">网页版</a>
+        <a href="https://github.com/zypy333/my-metal-dog" target="_blank" rel="noopener">GitHub 仓库</a>
+      </nav>
+    </main>
+  </body>
+</html>
